@@ -28,7 +28,7 @@ db.sequelize.sync()
 
   app.get('/komik', async (req, res) => {
     try {
-        const komiks = await db.Komik.findAll();
+        const komik = await db.Komik.findAll();
         res.send(komik);
     } catch (error) {
         res.send(error);
