@@ -34,3 +34,22 @@ db.sequelize.sync()
         res.send(error);
     }
   });
+
+  app.put('/komik/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    try {
+        const komik = await db.Komik.findByPk(id);
+        if (!komik) {
+            return res.status(404).send({ message: 'Komik tidak ditemukan' });
+        }
+
+        await komik.update(data);
+        res.send({ message: 'Komik berhasil diperbarui', komik });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+  });
+
+        
